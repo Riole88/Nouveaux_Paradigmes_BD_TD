@@ -21,6 +21,9 @@
                type="text"
                nullable="true"/>
 
+        <one-to-many field="motifsVisite" target-entity="toubeelib\praticien\Domaine\Entity\MotifVisite" mapped-by="specialite"/>
+
+
     </entity>
 
 </doctrine-mapping>

@@ -20,6 +20,8 @@
 
         <field name="telephone" type="string" length="24" nullable="true"/>
 
+        <one-to-many field="praticiens" target-entity="toubeelib\praticien\Domaine\Entity\Praticien" mapped-by="structure"/>
+
     </entity>
 
 </doctrine-mapping>

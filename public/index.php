@@ -62,9 +62,34 @@ $structure = $structureRepository->find("3444bdd2-8783-3aed-9a5e-4d298d2a2d7c");
 echo "<br> 4) <br>";
 if ($structure) {
     echo "Nom: " . $structure->getNom() . "<br>";
-    echo "Ville: " . $structure->getVille() . "<br>";
-    $praticiens = $structure->getPraticien();
-    echo "Praticien: " . $praticiens->getNom() . " " . $praticiens->getPrenom() . "<br>";
+    echo "Ville: " . $structure->getVille() . "<br><br>";
+
+    echo "Praticiens de la structure : <br>";
+    foreach ($structure->getPraticiens() as $praticien) {
+        echo $praticien->getNom() . " ";
+        echo $praticien->getPrenom() . "<br>";
+    }
 } else {
     echo "Structure non trouvé. <br>";
 }
+
+
+echo "<br> 5) <br>";
+$specialite = $specialiteRepository->find(1);
+
+if ($specialite) {
+    echo "<h3>Spécialité</h3>";
+    echo "ID: " . $specialite->getId() . "<br>";
+    echo "Libellé: " . $specialite->getLibelle() . "<br>";
+    echo "Description: " . ($specialite->getDescription() ?? "Aucune description") . "<br>";
+
+    echo "<h3>Motifs de visite associés à cette spécialité</h3>";
+    foreach ($specialite->getMotifsVisite() as $motif) {
+        echo "ID: " . $motif->getId() . " - ";
+        echo "Libellé: " . $motif->getLibelle() . "<br>";
+    }
+} else {
+    echo "Spécialité avec l'ID 1 non trouvée.";
+}
+
+

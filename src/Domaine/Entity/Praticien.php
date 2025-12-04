@@ -2,6 +2,8 @@
 
 namespace toubeelib\praticien\Domaine\Entity;
 
+use Doctrine\Common\Collections\Collection;
+
 class Praticien{
     private String $id;
     private string $nom;
@@ -15,6 +17,7 @@ class Praticien{
     private bool $accepte_nouveau_patient;
     private Specialite $specialite;
     private ?Structure $structure = null;
+    private Collection $motifsVisite;
 
     public function __construct(
         string $nom,
@@ -99,6 +102,28 @@ class Praticien{
     {
         return $this->structure;
     }
+
+    public function getMotifsVisite(): Collection
+    {
+        return $this->motifsVisite;
+    }
+
+    public function addMotifVisite(MotifVisite $motifVisite): self
+    {
+        if (!$this->motifsVisite->contains($motifVisite)) {
+            $this->motifsVisite[] = $motifVisite;
+        }
+        return $this;
+    }
+
+    public function removeMotifVisite(MotifVisite $motifVisite): self
+    {
+        $this->motifsVisite->removeElement($motifVisite);
+        return $this;
+    }
+
+
+
 
     // Setters
     public function setNom(string $nom): self

@@ -2,6 +2,8 @@
 
 namespace toubeelib\praticien\Domaine\Entity;
 
+use Doctrine\Common\Collections\Collection;
+
 class Structure{
     private string $id;
     private string $nom;
@@ -9,6 +11,7 @@ class Structure{
     private string $ville;
     private string $code_postal;
     private string $telephone;
+    private Collection $praticiens;
 
     public function __construct(
         string $nom,
@@ -55,6 +58,31 @@ class Structure{
     {
         return $this->telephone;
     }
+    
+    public function getPraticiens(): Collection
+    {
+        return $this->praticiens;
+    }
+
+    public function addPraticien(Praticien $praticien): self
+    {
+        if (!$this->praticiens->contains($praticien)) {
+            $this->praticiens[] = $praticien;
+            $praticien->setStructure($this);
+        }
+        return $this;
+    }
+
+    public function removePraticien(Praticien $praticien): self
+    {
+        if ($this->praticiens->removeElement($praticien)) {
+            $praticien->setStructure(null);
+        }
+        return $this;
+    }
+
+
+    
 
     //Setter
     public function setId(string $id): void
