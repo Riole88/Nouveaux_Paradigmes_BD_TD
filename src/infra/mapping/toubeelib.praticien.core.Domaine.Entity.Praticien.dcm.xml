@@ -4,7 +4,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="toubeelib\praticien\Domaine\Entity\Praticien" table="praticien">
+    <entity name="toubeelib\praticien\core\Domaine\Entity\Praticien"
+            table="praticien">
 
         <id name="id" type="string" column="id">
             <generator strategy="NONE"/>
@@ -40,7 +41,7 @@
             </options>
         </field>
 
-        <many-to-one field="specialite" target-entity="toubeelib\praticien\Domaine\Entity\Specialite">
+        <many-to-one field="specialite" target-entity="toubeelib\praticien\core\Domaine\Entity\Specialite">
             <join-column name="specialite_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
 
