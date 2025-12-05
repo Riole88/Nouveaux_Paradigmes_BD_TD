@@ -34,8 +34,8 @@ CREATE TABLE "public"."praticien" (
     "specialite_id" integer NOT NULL,
     "structure_id" uuid,
     "rpps_id" character varying(12),
-    "organisation" bit(1) DEFAULT '0' NOT NULL,
-    "nouveau_patient" bit(1) DEFAULT '1' NOT NULL,
+    "organisation" boolean DEFAULT false NOT NULL,
+    "nouveau_patient" boolean DEFAULT true NOT NULL,
     "titre" character varying(8) DEFAULT 'Dr.' NOT NULL
 ) WITH (oids = false);
 

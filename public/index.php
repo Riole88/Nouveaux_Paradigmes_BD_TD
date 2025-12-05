@@ -6,6 +6,7 @@ require_once __DIR__ . '/../src/bootstrap.php';
 use toubeelib\praticien\Domaine\Entity\Praticien;
 use toubeelib\praticien\Domaine\Entity\Specialite;
 use toubeelib\praticien\Domaine\Entity\Structure;
+use Ramsey\Uuid\Uuid;
 
 $specialiteRepository = $entityManager->getRepository(Specialite::class);
 
@@ -21,6 +22,9 @@ if ($specialiteID1) {
     echo "Spécialité avec l'ID 1 non trouvée. <br>";
 }
 
+
+
+
 $pratricienRepository = $entityManager->getRepository(Praticien::class);
 $praticien = $pratricienRepository->find("8ae1400f-d46d-3b50-b356-269f776be532");
 echo "<br> 2) <br>";
@@ -34,6 +38,9 @@ if ($praticien) {
 } else {
     echo "Praticien non trouvé. <br>";
 }
+
+
+
 
 $praticien2 = $pratricienRepository->find("8ae1400f-d46d-3b50-b356-269f776be532");
 echo "<br> 3) <br>";
@@ -57,6 +64,9 @@ if ($praticien2) {
     echo "Praticien non trouvé. <br>";
 }
 
+
+
+
 $structureRepository = $entityManager->getRepository(Structure::class);
 $structure = $structureRepository->find("3444bdd2-8783-3aed-9a5e-4d298d2a2d7c");
 echo "<br> 4) <br>";
@@ -73,6 +83,9 @@ if ($structure) {
 } else {
     echo "Structure non trouvé. <br>";
 }
+
+
+
 
 
 echo "<br> 5) <br>";
@@ -94,6 +107,8 @@ if ($specialite) {
 }
 
 
+
+
 echo "<br>6)<br>";
 $praticien = $pratricienRepository->find("8ae1400f-d46d-3b50-b356-269f776be532");
 
@@ -113,4 +128,50 @@ if ($praticien) {
     }
 } else {
     echo "Praticien avec l'ID 8ae1400f-d46d-3b50-b356-269f776be532 non trouvé.";
+}
+
+
+
+
+
+echo "<br>7)<br>";
+// 1. Récupérer la spécialité Pédiatrie
+$specialite = $specialiteRepository->find(3);
+
+if (!$specialite) {
+    echo "La spécialité 'Pédiatrie' n'existe pas.";
+}
+
+// 2. Créer le praticien
+$praticien = new Praticien(
+    nom: "Dupond",
+    rpps_id: "12345678901",
+    prenom: "Xavier",
+    titre: "Dr.",
+    ville: "Nante",
+    email: "xavier.dupond@example.com",
+    telephone: "04 72 00 00 00",
+);
+
+// 3. Définir l'ID et la spécialité
+$UuidPraticien = Uuid::uuid4()->toString();
+$praticien->setId($UuidPraticien);
+$praticien->setSpecialite($specialite);
+
+// 4. Sauvegarder
+$entityManager->persist($praticien);
+$entityManager->flush();
+
+// 5. Recherche
+$praticien = $pratricienRepository->find($UuidPraticien);
+if ($praticien) {
+    echo "ID: " . $praticien->getId() . "<br>";
+    echo "Nom: " . $praticien->getNom() . "<br>";
+    echo "Prénom: " . $praticien->getPrenom() . "<br>";
+    echo "Ville: " . $praticien->getVille() . "<br>";
+    echo "Email: " . $praticien->getEmail() . "<br>";
+    echo "Téléphone: " . $praticien->getTelephone() . "<br>";
+    echo "Spécialité: " . $praticien->getSpecialite()->getLibelle() . "<br>";
+} else {
+    echo "Praticien non trouvé. <br>";
 }
