@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/bootstrap.php';
 
+use toubeelib\praticien\Domaine\Entity\MotifVisite;
 use toubeelib\praticien\Domaine\Entity\Praticien;
 use toubeelib\praticien\Domaine\Entity\Specialite;
 use toubeelib\praticien\Domaine\Entity\Structure;
@@ -172,6 +173,73 @@ if ($praticien) {
     echo "Email: " . $praticien->getEmail() . "<br>";
     echo "Téléphone: " . $praticien->getTelephone() . "<br>";
     echo "Spécialité: " . $praticien->getSpecialite()->getLibelle() . "<br>";
+} else {
+    echo "Praticien non trouvé. <br>";
+}
+
+
+
+
+echo "<br>8)<br>";
+$praticien = $pratricienRepository->find($UuidPraticien);
+$praticien->setStructure($structureRepository->find('3444bdd2-8783-3aed-9a5e-4d298d2a2d7c'));
+$praticien->setVille("Paris");
+$motifRepository = $entityManager->getRepository(MotifVisite::class);
+$motif1 = $motifRepository->find(12);
+$motif2 = $motifRepository->find(13);
+$motif3 = $motifRepository->find(14);
+/*$motif1->addPraticien($praticien);
+$motif2->addPraticien($praticien);
+$motif3->addPraticien($praticien);
+$praticien->addMotifVisite($motif1);
+$praticien->addMotifVisite($motif2);
+$praticien->addMotifVisite($motif3);
+$entityManager->flush();*/
+
+
+
+$praticien = $pratricienRepository->find($UuidPraticien);
+if ($praticien) {
+    echo "ID: " . $praticien->getId() . "<br>";
+    echo "Nom: " . $praticien->getNom() . "<br>";
+    echo "Prénom: " . $praticien->getPrenom() . "<br>";
+    echo "Ville: " . $praticien->getVille() . "<br>";
+    echo "Email: " . $praticien->getEmail() . "<br>";
+    echo "Téléphone: " . $praticien->getTelephone() . "<br>";
+    echo "Spécialité: " . $praticien->getSpecialite()->getLibelle() . "<br>";
+
+    /*echo "<b>Motifs de visite acceptés par ce praticien</b><br>";
+    foreach ($praticien->getMotifsVisite() as $motif) {
+        echo $motif->getLibelle();
+        echo " (Spécialité: " . $motif->getSpecialite()->getLibelle() . ")<br>";
+    }*/
+
+    echo "<b>Structure du patricien</b><br>";
+    $structure = $praticien2->getStructure();
+    if ($structure) {
+        echo "Structure: " . $structure->getNom() . " - " . $structure->getVille() . "<br>";
+    } else {
+        echo "Structure: Aucune structure associée<br>";
+    }
+} else {
+    echo "Praticien non trouvé. <br>";
+}
+
+
+
+
+
+echo "<br>9)<br>";
+$praticien = $pratricienRepository->find($UuidPraticien);
+$entityManager->remove($praticien);
+$entityManager->flush();
+
+$praticien = $pratricienRepository->find($UuidPraticien);
+if ($praticien) {
+    echo "ID: " . $praticien->getId() . "<br>";
+    echo "Nom: " . $praticien->getNom() . "<br>";
+    echo "Prénom: " . $praticien->getPrenom() . "<br>";
+    echo "Ville: " . $praticien->getVille() . "<br>";
 } else {
     echo "Praticien non trouvé. <br>";
 }
