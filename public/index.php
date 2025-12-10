@@ -243,3 +243,67 @@ if ($praticien) {
 } else {
     echo "Praticien non trouvé. <br>";
 }
+
+
+
+
+echo "<br><h2>Exercice 2</h2>";
+echo "1)<br>";
+$praticien = $pratricienRepository->findOneBy(["email" => "Gabrielle.Klein@live.com"]);
+if ($praticien) {
+    echo "ID: " . $praticien->getId() . "<br>";
+    echo "Nom: " . $praticien->getNom() . "<br>";
+    echo "Prénom: " . $praticien->getPrenom() . "<br>";
+    echo "Ville: " . $praticien->getVille() . "<br>";
+} else {
+    echo "Praticien non trouvé. <br>";
+}
+
+
+
+
+echo "<br>2)<br>";
+$praticien = $pratricienRepository->findOneBy(["nom" => "Goncalves", "ville" => "Paris"]);
+if ($praticien) {
+    echo "ID: " . $praticien->getId() . "<br>";
+    echo "Nom: " . $praticien->getNom() . "<br>";
+    echo "Prénom: " . $praticien->getPrenom() . "<br>";
+    echo "Ville: " . $praticien->getVille() . "<br>";
+} else {
+    echo "Praticien non trouvé. <br>";
+}
+
+
+
+
+echo "<br>3)<br>";
+$specialite = $specialiteRepository->findOneBy(["libelle" => "pédiatrie"]);
+if ($specialite) {
+    echo "<b>Spécialité</b><br>";
+    echo "ID: " . $specialite->getId() . "<br>";
+    echo "Libellé: " . $specialite->getLibelle() . "<br>";
+    echo "Description: " . ($specialite->getDescription() ?? "Aucune description") . "<br>";
+
+    echo "<b>Praticiens associés à cette spécialité</b><br>";
+    foreach ($specialite->getPraticiens() as $praticien) {
+        echo "Nom: " . $praticien->getNom() . "<br>";
+        echo "Prénom: " . $praticien->getPrenom() . "<br>";
+        echo "Ville: " . $praticien->getVille() . "<br>";
+        echo "<br>";
+    }
+} else {
+    echo "Spécialité avec l'ID 1 non trouvée.";
+}
+
+echo "<br>5)<br>";
+$specialite = $specialiteRepository->findOneBy(['libelle' => 'ophtalmologie']);
+if ($specialite) {
+    foreach ($specialite->getPraticiens() as $praticien) {
+        if ($praticien->getVille() === "Paris") {
+            echo "Nom: " . $praticien->getNom() . "<br>";
+            echo "Prénom: " . $praticien->getPrenom() . "<br>";
+            echo "Ville: " . $praticien->getVille() . "<br>";
+            echo "<br>";
+        }
+    }
+}

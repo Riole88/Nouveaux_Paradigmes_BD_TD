@@ -10,6 +10,7 @@ class Specialite
     private string $libelle;
     private ?string $description = null;
     private Collection $motifsVisite;
+    private Collection $praticiens;
 
     public function __construct(string $libelle, string $description){
         $this->libelle = $libelle;
@@ -61,6 +62,18 @@ class Specialite
     {
         if ($this->motifsVisite->removeElement($motifVisite)) {
             // Optionnel : gérer la suppression de la relation inverse
+        }
+        return $this;
+    }
+
+    public function getPraticiens(): Collection {
+        return $this->praticiens;
+    }
+
+    public function addPraticien(Praticien $praticien): self {
+        if (!$this->praticiens->contains($praticien)) {
+            $this->praticiens[] = $praticien;
+            $praticien->setSpecialite($this);
         }
         return $this;
     }

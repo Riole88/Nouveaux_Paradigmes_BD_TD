@@ -21,6 +21,7 @@
                nullable="true"/>
 
         <one-to-many field="motifsVisite" target-entity="toubeelib\praticien\core\Domaine\Entity\MotifVisite" mapped-by="specialite"/>
+        <one-to-many field="praticiens" target-entity="toubeelib\praticien\core\Domaine\Entity\Praticien" mapped-by="specialite"/>
 
 
     </entity>
