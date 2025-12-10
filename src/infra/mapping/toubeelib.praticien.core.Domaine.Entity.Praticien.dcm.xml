@@ -45,11 +45,11 @@
             <join-column name="specialite_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
 
-        <many-to-one field="structure" target-entity="toubeelib\praticien\Domaine\Entity\Structure">
+        <many-to-one field="structure" target-entity="toubeelib\praticien\core\Domaine\Entity\Structure">
             <join-column name="structure_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>
 
-        <many-to-many field="motifsVisite" target-entity="toubeelib\praticien\Domaine\Entity\MotifVisite" inversed-by="praticiens">
+        <many-to-many field="motifsVisite" target-entity="toubeelib\praticien\core\Domaine\Entity\MotifVisite" inversed-by="praticiens">
             <join-table name="praticien2motif">
                 <join-columns>
                     <join-column name="praticien_id" referenced-column-name="id"/>
