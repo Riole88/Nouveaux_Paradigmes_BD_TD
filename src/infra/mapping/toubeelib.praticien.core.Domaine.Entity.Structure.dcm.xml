@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="toubeelib\praticien\Domaine\Entity\Structure" table="structure">
+    <entity name="toubeelib\praticien\core\Domaine\Entity\Structure" table="structure">
 
         <id name="id" type="string" column="id">
             <generator strategy="NONE"/>
@@ -20,7 +20,7 @@
 
         <field name="telephone" type="string" length="24" nullable="true"/>
 
-        <one-to-many field="praticiens" target-entity="toubeelib\praticien\Domaine\Entity\Praticien" mapped-by="structure"/>
+        <one-to-many field="praticiens" target-entity="toubeelib\praticien\core\Domaine\Entity\Praticien" mapped-by="structure"/>
 
     </entity>
 

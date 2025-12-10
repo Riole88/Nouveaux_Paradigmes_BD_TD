@@ -3,10 +3,10 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/bootstrap.php';
 
-use toubeelib\praticien\Domaine\Entity\MotifVisite;
-use toubeelib\praticien\Domaine\Entity\Praticien;
-use toubeelib\praticien\Domaine\Entity\Specialite;
-use toubeelib\praticien\Domaine\Entity\Structure;
+use toubeelib\praticien\core\Domaine\Entity\MotifVisite;
+use toubeelib\praticien\core\Domaine\Entity\Praticien;
+use toubeelib\praticien\core\Domaine\Entity\Specialite;
+use toubeelib\praticien\core\Domaine\Entity\Structure;
 use Ramsey\Uuid\Uuid;
 
 $specialiteRepository = $entityManager->getRepository(Specialite::class);
