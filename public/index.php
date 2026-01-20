@@ -13,8 +13,8 @@ $specialiteRepository = $entityManager->getRepository(Specialite::class);
 
 $specialiteID1 = $specialiteRepository->find(1);
 
-echo "Excercice 1 <br>";
-echo "1) <br>";
+echo "<h2>Excercice 1</h2> <br>";
+echo "<h3>1) Afficher la spécialité d'identifiant 1 : id, libellé, description.</h3>";
 if ($specialiteID1) {
     echo "ID: " . $specialiteID1->getId() . "<br>";
     echo "Libellé: " . $specialiteID1->getLibelle() . "<br>";
@@ -28,7 +28,7 @@ if ($specialiteID1) {
 
 $pratricienRepository = $entityManager->getRepository(Praticien::class);
 $praticien = $pratricienRepository->find("8ae1400f-d46d-3b50-b356-269f776be532");
-echo "<br> 2) <br>";
+echo "<br><h3>2) Afficher le praticien dont l’id est : 8ae1400f-d46d-3b50-b356-269f776be532 - id, nom, prénom, ville, email, téléphone</h3>";
 if ($praticien) {
     echo "ID: " . $praticien->getId() . "<br>";
     echo "Nom: " . $praticien->getNom() . "<br>";
@@ -44,7 +44,7 @@ if ($praticien) {
 
 
 $praticien2 = $pratricienRepository->find("8ae1400f-d46d-3b50-b356-269f776be532");
-echo "<br> 3) <br>";
+echo "<br><h3>3) Compléter en affichant sa spécialité et sa structure de rattachement.</h3>";
 if ($praticien2) {
     echo "ID: " . $praticien2->getId() . "<br>";
     echo "Nom: " . $praticien2->getNom() . "<br>";
@@ -70,8 +70,8 @@ if ($praticien2) {
 
 $structureRepository = $entityManager->getRepository(Structure::class);
 $structure = $structureRepository->find("3444bdd2-8783-3aed-9a5e-4d298d2a2d7c");
-echo "<br> 4) <br>";
-echo "<h3>Structure qui a l'id : 3444bdd2-8783-3aed-9a5e-4d298d2a2d7c</h3>";
+echo "<br><h3>4) Afficher la structure 3444bdd2-8783-3aed-9a5e-4d298d2a2d7c avec la liste de praticiens.</h3>";
+echo "<b>Structure qui a l'id : 3444bdd2-8783-3aed-9a5e-4d298d2a2d7c</b><br>";
 if ($structure) {
     echo "Nom: " . $structure->getNom() . "<br>";
     echo "Ville: " . $structure->getVille() . "<br><br>";
@@ -89,16 +89,16 @@ if ($structure) {
 
 
 
-echo "<br> 5) <br>";
+echo "<br><h3>5) Afficher la spécialité d'identifiant 1 et les motifs de visite associés</h3>";
 $specialite = $specialiteRepository->find(1);
 
 if ($specialite) {
-    echo "<h3>Spécialité</h3>";
+    echo "<b>Spécialité :</b><br>";
     echo "ID: " . $specialite->getId() . "<br>";
     echo "Libellé: " . $specialite->getLibelle() . "<br>";
     echo "Description: " . ($specialite->getDescription() ?? "Aucune description") . "<br>";
 
-    echo "<b>Motifs de visite associés à cette spécialité</b><br>";
+    echo "<b>Motifs de visite associés à cette spécialité :</b><br>";
     foreach ($specialite->getMotifsVisite() as $motif) {
         echo "ID: " . $motif->getId() . " - ";
         echo "Libellé: " . $motif->getLibelle() . "<br>";
@@ -110,11 +110,11 @@ if ($specialite) {
 
 
 
-echo "<br>6)<br>";
+echo "<br><h3>6) Praticien 8ae1400f-d46d-3b50-b356-269f776be532 : afficher la liste de ses motifs de visite</h3>";
 $praticien = $pratricienRepository->find("8ae1400f-d46d-3b50-b356-269f776be532");
 
 if ($praticien) {
-    echo "<h3>Informations du praticien</h3>";
+    echo "<b>Informations du praticien :</b><br>";
     echo "ID: " . $praticien->getId() . "<br>";
     echo "Nom: " . $praticien->getTitre() . " " . $praticien->getPrenom() . " " . $praticien->getNom() . "<br>";
     echo "Ville: " . $praticien->getVille() . "<br>";
@@ -122,7 +122,7 @@ if ($praticien) {
     echo "Téléphone: " . $praticien->getTelephone() . "<br>";
     echo "Spécialité: " . $praticien->getSpecialite()->getLibelle() . "<br><br>";
 
-    echo "<b>Motifs de visite acceptés par ce praticien</b><br>";
+    echo "<b>Motifs de visite acceptés par ce praticien :</b><br>";
     foreach ($praticien->getMotifsVisite() as $motif) {
         echo $motif->getLibelle();
         echo " (Spécialité: " . $motif->getSpecialite()->getLibelle() . ")<br>";
@@ -135,7 +135,7 @@ if ($praticien) {
 
 
 
-echo "<br>7)<br>";
+echo "<br><h3>7) Créer un praticien, spécialité pédiatrie, et le sauvegarder dans la base</h3>";
 // 1. Récupérer la spécialité Pédiatrie
 $specialite = $specialiteRepository->find(3);
 
@@ -180,7 +180,7 @@ if ($praticien) {
 
 
 
-echo "<br>8)<br>";
+echo "<br><h3>8) Modifier ce praticien : le rattacher à la structure 'Cabinet Bigot', changer sa ville pour 'Paris', ajouter des motifs de visite et sauvegarder dans la base.</h3>";
 $praticien = $pratricienRepository->find($UuidPraticien);
 $praticien->setStructure($structureRepository->find('3444bdd2-8783-3aed-9a5e-4d298d2a2d7c'));
 $praticien->setVille("Paris");
@@ -208,13 +208,7 @@ if ($praticien) {
     echo "Téléphone: " . $praticien->getTelephone() . "<br>";
     echo "Spécialité: " . $praticien->getSpecialite()->getLibelle() . "<br>";
 
-    /*echo "<b>Motifs de visite acceptés par ce praticien</b><br>";
-    foreach ($praticien->getMotifsVisite() as $motif) {
-        echo $motif->getLibelle();
-        echo " (Spécialité: " . $motif->getSpecialite()->getLibelle() . ")<br>";
-    }*/
-
-    echo "<b>Structure du patricien</b><br>";
+    echo "<b>Structure du patricien :</b><br>";
     $structure = $praticien2->getStructure();
     if ($structure) {
         echo "Structure: " . $structure->getNom() . " - " . $structure->getVille() . "<br>";
@@ -229,7 +223,7 @@ if ($praticien) {
 
 
 
-echo "<br>9)<br>";
+echo "<br><h3>9) Supprimer ce praticien et mettre à jour la base</h3>";
 $praticien = $pratricienRepository->find($UuidPraticien);
 $entityManager->remove($praticien);
 $entityManager->flush();
@@ -247,8 +241,8 @@ if ($praticien) {
 
 
 
-echo "<br><h2>Exercice 2</h2>";
-echo "1)<br>";
+echo "<br><hr><h2>Exercice 2</h2>";
+echo "<h3>1) Afficher le praticien dont le mail est Gabrielle.Klein@live.com (requête simple)</h3>";
 $praticien = $pratricienRepository->findOneBy(["email" => "Gabrielle.Klein@live.com"]);
 if ($praticien) {
     echo "ID: " . $praticien->getId() . "<br>";
@@ -262,7 +256,7 @@ if ($praticien) {
 
 
 
-echo "<br>2)<br>";
+echo "<br><h3>2)  Afficher le praticien de nom Goncalves à Paris (requête simple)</h3>";
 $praticien = $pratricienRepository->findOneBy(["nom" => "Goncalves", "ville" => "Paris"]);
 if ($praticien) {
     echo "ID: " . $praticien->getId() . "<br>";
@@ -276,7 +270,7 @@ if ($praticien) {
 
 
 
-echo "<br>3)<br>";
+echo "<br><h3>3) Afficher la spécialité de libellé 'pédiatrie' ainsi que les praticiens associés. (requête simple)</h3>";
 $specialite = $specialiteRepository->findOneBy(["libelle" => "pédiatrie"]);
 if ($specialite) {
     echo "<b>Spécialité</b><br>";
@@ -284,7 +278,7 @@ if ($specialite) {
     echo "Libellé: " . $specialite->getLibelle() . "<br>";
     echo "Description: " . ($specialite->getDescription() ?? "Aucune description") . "<br>";
 
-    echo "<b>Praticiens associés à cette spécialité</b><br>";
+    echo "<b>Praticiens associés à cette spécialité :</b><br>";
     foreach ($specialite->getPraticiens() as $praticien) {
         echo "Nom: " . $praticien->getNom() . "<br>";
         echo "Prénom: " . $praticien->getPrenom() . "<br>";
@@ -295,7 +289,7 @@ if ($specialite) {
     echo "Spécialité avec l'ID 1 non trouvée.";
 }
 
-echo "<br>5)<br>";
+echo "<br><h3>5) Afficher les praticiens de la spécialité ‘ophtalmologie exerçants à Paris</h3>";
 $specialite = $specialiteRepository->findOneBy(['libelle' => 'ophtalmologie']);
 if ($specialite) {
     foreach ($specialite->getPraticiens() as $praticien) {
@@ -311,8 +305,8 @@ if ($specialite) {
 
 
 
-echo "<br><h2>Exercice 3</h2>";
-echo "1)<br>";
+echo "<br><hr><h2>Exercice 3</h2>";
+echo "<h3>1) Liste des spécialités contenant un mot clé dans le libellé ou la description</h3>";
 $repo = $entityManager->getRepository(
     toubeelib\praticien\core\Domaine\Entity\Specialite::class
 );
