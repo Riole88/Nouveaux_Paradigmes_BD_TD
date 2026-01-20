@@ -307,3 +307,18 @@ if ($specialite) {
         }
     }
 }
+
+
+
+
+echo "<br><h2>Exercice 3</h2>";
+echo "1)<br>";
+$repo = $entityManager->getRepository(
+    toubeelib\praticien\core\Domaine\Entity\Specialite::class
+);
+
+$results = $repo->getSpecialiteByKeyword("Maladies");
+
+foreach ($results as $s) {
+    echo $s->getLibelle() . " — " . $s->getDescription() . "<br>";
+}

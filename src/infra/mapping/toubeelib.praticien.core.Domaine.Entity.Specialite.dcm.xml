@@ -5,7 +5,8 @@
                   https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="toubeelib\praticien\core\Domaine\Entity\Specialite"
-            table="specialite">
+            table="specialite"
+            repository-class="toubeelib\praticien\infra\Repository\RepositorySpecialite">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
